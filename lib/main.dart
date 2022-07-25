@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -32,8 +34,9 @@ class Dice extends StatefulWidget {
 }
 
 class _DiceState extends State<Dice> {
-  var leftButtonClickCount = 0;
-  var rightButtonClickCount = 0;
+  Random randomizer = Random();
+  int leftButtonClickCount = 0;
+  int rightButtonClickCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +49,20 @@ class _DiceState extends State<Dice> {
               child: TextButton(
                 onPressed: () {
                   setState(() {
-                    leftButtonClickCount++;
-                    var snackBar = SnackBar(
-                      content: Text(
-                          'Left button clicked $leftButtonClickCount times'),
-                      duration: const Duration(milliseconds: 800),
-                      action: SnackBarAction(
-                        label: 'Ok',
-                        onPressed: () {},
-                      ),
-                    );
+                    // leftButtonClickCount++;
 
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    leftButtonClickCount = randomizer.nextInt(6) + 1;
+                    // var snackBar = SnackBar(
+                    //   content: Text(
+                    //       'Left button clicked $leftButtonClickCount times'),
+                    //   duration: const Duration(milliseconds: 800),
+                    //   action: SnackBarAction(
+                    //     label: 'Ok',
+                    //     onPressed: () {},
+                    //   ),
+                    // );
+
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   });
                 },
                 child: Image(
@@ -73,18 +78,19 @@ class _DiceState extends State<Dice> {
               child: TextButton(
                 onPressed: () {
                   setState(() {
-                    rightButtonClickCount++;
+                    // rightButtonClickCount++;
+                    rightButtonClickCount = randomizer.nextInt(6) + 1;
 
-                    var snackBar = SnackBar(
-                      content: Text(
-                          'Right button clicked $rightButtonClickCount times'),
-                      duration: const Duration(milliseconds: 800),
-                      action: SnackBarAction(
-                        label: 'Ok',
-                        onPressed: () {},
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    // var snackBar = SnackBar(
+                    //   content: Text(
+                    //       'Right button clicked $rightButtonClickCount times'),
+                    //   duration: const Duration(milliseconds: 800),
+                    //   action: SnackBarAction(
+                    //     label: 'Ok',
+                    //     onPressed: () {},
+                    //   ),
+                    // );
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   });
                 },
                 child: Image.asset(
