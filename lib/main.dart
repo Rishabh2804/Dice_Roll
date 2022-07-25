@@ -18,77 +18,7 @@ class MyApp extends StatelessWidget {
           title: const Text('Dicee'),
           backgroundColor: Colors.red,
         ),
-        body: DicePage(),
-      ),
-    );
-  }
-}
-
-class DicePage extends StatelessWidget {
-  DicePage({super.key});
-  var leftButtonClickCount = 0;
-  var rightButtonClickCount = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    leftButtonClickCount = leftButtonClickCount % 6 + 1;
-    rightButtonClickCount = rightButtonClickCount % 6 + 1;
-
-    var leftDieImage = 'images/dice$leftButtonClickCount.png';
-    var rightDieImage = 'images/dice$rightButtonClickCount.png';
-
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: () {
-                  leftButtonClickCount = leftButtonClickCount++ % 6 + 1;
-                  leftDieImage = 'images/dice$leftButtonClickCount.png';
-
-                  var snackBar = SnackBar(
-                    content: Text(leftDieImage),
-                    duration: const Duration(milliseconds: 800),
-                    action: SnackBarAction(
-                      label: 'Ok',
-                      onPressed: () {},
-                    ),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: Image(
-                  key: key,
-                  image: AssetImage(leftDieImage),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: () {
-                  rightButtonClickCount = rightButtonClickCount++ % 6 + 1;
-                  rightDieImage = 'images/dice$rightButtonClickCount.png';
-
-                  var snackBar = SnackBar(
-                    content: Text(rightDieImage),
-                    duration: const Duration(milliseconds: 800),
-                    action: SnackBarAction(
-                      label: 'Ok',
-                      onPressed: () {},
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: Image.asset(rightDieImage),
-              ),
-            ),
-          ),
-        ],
+        body: const Dice(),
       ),
     );
   }
@@ -107,12 +37,6 @@ class _DiceState extends State<Dice> {
 
   @override
   Widget build(BuildContext context) {
-    leftButtonClickCount = leftButtonClickCount % 6 + 1;
-    rightButtonClickCount = rightButtonClickCount % 6 + 1;
-
-    var leftDieImage = 'images/dice$leftButtonClickCount.png';
-    var rightDieImage = 'images/dice$rightButtonClickCount.png';
-
     return Center(
       child: Row(
         children: <Widget>[
@@ -121,22 +45,24 @@ class _DiceState extends State<Dice> {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 onPressed: () {
-                  leftButtonClickCount = leftButtonClickCount++ % 6 + 1;
-                  leftDieImage = 'images/dice$leftButtonClickCount.png';
+                  setState(() {
+                    leftButtonClickCount++;
+                    var snackBar = SnackBar(
+                      content: Text(
+                          'Left button clicked $leftButtonClickCount times'),
+                      duration: const Duration(milliseconds: 800),
+                      action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {},
+                      ),
+                    );
 
-                  var snackBar = SnackBar(
-                    content: Text(leftDieImage),
-                    duration: const Duration(milliseconds: 800),
-                    action: SnackBarAction(
-                      label: 'Ok',
-                      onPressed: () {},
-                    ),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  });
                 },
                 child: Image(
-                  image: AssetImage(leftDieImage),
+                  image: AssetImage(
+                      'images/dice${leftButtonClickCount % 6 + 1}.png'),
                 ),
               ),
             ),
@@ -146,20 +72,23 @@ class _DiceState extends State<Dice> {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 onPressed: () {
-                  rightButtonClickCount = rightButtonClickCount++ % 6 + 1;
-                  rightDieImage = 'images/dice$rightButtonClickCount.png';
+                  setState(() {
+                    rightButtonClickCount++;
 
-                  var snackBar = SnackBar(
-                    content: Text(rightDieImage),
-                    duration: const Duration(milliseconds: 800),
-                    action: SnackBarAction(
-                      label: 'Ok',
-                      onPressed: () {},
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    var snackBar = SnackBar(
+                      content: Text(
+                          'Right button clicked $rightButtonClickCount times'),
+                      duration: const Duration(milliseconds: 800),
+                      action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {},
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  });
                 },
-                child: Image.asset(rightDieImage),
+                child: Image.asset(
+                    'images/dice${rightButtonClickCount % 6 + 1}.png'),
               ),
             ),
           ),
