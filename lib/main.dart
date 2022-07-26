@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 236, 247, 177),
+        backgroundColor: const Color.fromARGB(255, 235, 248, 149),
         appBar: AppBar(
           title: const Text('🎲 Dice Roll : Test your luck!!'),
           backgroundColor: Colors.teal,
@@ -55,7 +55,7 @@ class _DiceState extends State<Dice> {
                   }),
                   child: Image.asset(
                     'images/dice$leftButton.png',
-                    color: const Color.fromARGB(255, 103, 150, 226),
+                    color: const Color.fromARGB(255, 21, 88, 196),
                   ),
                 ),
               ),
@@ -69,7 +69,7 @@ class _DiceState extends State<Dice> {
                   }),
                   child: Image.asset(
                     'images/dice$rightButton.png',
-                    color: const Color.fromARGB(255, 103, 150, 226),
+                    color: const Color.fromARGB(255, 229, 55, 16),
                   ),
                 ),
               ),
@@ -82,7 +82,7 @@ class _DiceState extends State<Dice> {
             ElevatedButton(
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 76, 235, 235)),
+                    const Color.fromARGB(255, 81, 154, 154)),
               ),
               child: const Text("Roll both Dice!!"),
               onPressed: () => setState(() {
