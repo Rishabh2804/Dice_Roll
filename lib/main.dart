@@ -41,58 +41,64 @@ class _DiceState extends State<Dice> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton(
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () => setState(() {
+                        updateLeftButton();
+                      }),
+                      child: Image.asset(
+                        'images/dice$leftButton.png',
+                        color: const Color.fromARGB(255, 21, 88, 196),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () => setState(() {
+                        updateRightButton();
+                      }),
+                      child: Image.asset(
+                        'images/dice$rightButton.png',
+                        color: const Color.fromARGB(255, 229, 55, 16),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            ButtonBar(
+              alignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 81, 154, 154)),
+                  ),
+                  child: const Text("Roll both Dice!!"),
                   onPressed: () => setState(() {
                     updateLeftButton();
-                  }),
-                  child: Image.asset(
-                    'images/dice$leftButton.png',
-                    color: const Color.fromARGB(255, 21, 88, 196),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  onPressed: () => setState(() {
                     updateRightButton();
                   }),
-                  child: Image.asset(
-                    'images/dice$rightButton.png',
-                    color: const Color.fromARGB(255, 229, 55, 16),
-                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
-        ButtonBar(
-          alignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 81, 154, 154)),
-              ),
-              child: const Text("Roll both Dice!!"),
-              onPressed: () => setState(() {
-                updateLeftButton();
-                updateRightButton();
-              }),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }

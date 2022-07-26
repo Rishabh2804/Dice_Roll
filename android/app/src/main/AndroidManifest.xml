@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dice_roll">
+    package="com.example.Dice_Roll">
    <application
-        android:label="dice_roll"
+        android:label="Dice Roll"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
