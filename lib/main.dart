@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 236, 247, 177),
         appBar: AppBar(
-          title: const Text('Dicee'),
-          backgroundColor: Colors.red,
+          title: const Text('🎲 Dice Roll : Test your luck!!'),
+          backgroundColor: Colors.teal,
         ),
         body: const Dice(),
       ),
@@ -34,72 +33,66 @@ class Dice extends StatefulWidget {
 }
 
 class _DiceState extends State<Dice> {
-  Random randomizer = Random();
-  int leftButtonClickCount = 0;
-  int rightButtonClickCount = 0;
+  int leftButton = 1;
+  int rightButton = 1;
+
+  void updateLeftButton() => leftButton = Random().nextInt(6) + 1;
+  void updateRightButton() => rightButton = Random().nextInt(6) + 1;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    // leftButtonClickCount++;
-
-                    leftButtonClickCount = randomizer.nextInt(6) + 1;
-                    // var snackBar = SnackBar(
-                    //   content: Text(
-                    //       'Left button clicked $leftButtonClickCount times'),
-                    //   duration: const Duration(milliseconds: 800),
-                    //   action: SnackBarAction(
-                    //     label: 'Ok',
-                    //     onPressed: () {},
-                    //   ),
-                    // );
-
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  });
-                },
-                child: Image(
-                  image: AssetImage(
-                      'images/dice${leftButtonClickCount % 6 + 1}.png'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () => setState(() {
+                    updateLeftButton();
+                  }),
+                  child: Image.asset(
+                    'images/dice$leftButton.png',
+                    color: const Color.fromARGB(255, 103, 150, 226),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    // rightButtonClickCount++;
-                    rightButtonClickCount = randomizer.nextInt(6) + 1;
-
-                    // var snackBar = SnackBar(
-                    //   content: Text(
-                    //       'Right button clicked $rightButtonClickCount times'),
-                    //   duration: const Duration(milliseconds: 800),
-                    //   action: SnackBarAction(
-                    //     label: 'Ok',
-                    //     onPressed: () {},
-                    //   ),
-                    // );
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  });
-                },
-                child: Image.asset(
-                    'images/dice${rightButtonClickCount % 6 + 1}.png'),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () => setState(() {
+                    updateRightButton();
+                  }),
+                  child: Image.asset(
+                    'images/dice$rightButton.png',
+                    color: const Color.fromARGB(255, 103, 150, 226),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        ButtonBar(
+          alignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(
+                    const Color.fromARGB(255, 76, 235, 235)),
+              ),
+              child: const Text("Roll both Dice!!"),
+              onPressed: () => setState(() {
+                updateLeftButton();
+                updateRightButton();
+              }),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
