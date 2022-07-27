@@ -12,13 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Dice Roll',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 235, 248, 149),
         appBar: AppBar(
           title: const Text('🎲 Dice Roll : Test your luck!!'),
           backgroundColor: Colors.teal,
         ),
+        backgroundColor: const Color.fromARGB(255, 235, 248, 149),
         body: const Dice(),
       ),
     );
@@ -45,7 +46,7 @@ class _DiceState extends State<Dice> {
       child: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
